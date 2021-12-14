@@ -11,7 +11,10 @@ import androidx.interpolator.view.animation.FastOutLinearInInterpolator
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import androidx.interpolator.view.animation.LinearOutSlowInInterpolator
 import com.dreamers.bottombar.library.AnimatedBottomBar
-import com.google.appinventor.components.runtime.errors.YailRuntimeError
+import com.google.appinventor.components.runtime.Form
+import com.google.appinventor.components.runtime.ReplForm
+import java.io.FileInputStream
+import java.io.InputStream
 
 const val LOG_TAG = "BOTTOM_BAR"
 
@@ -28,23 +31,49 @@ internal fun getIndicatorPositionFromString(position: String) = when (position) 
     else -> AnimatedBottomBar.IndicatorLocation.TOP
 }
 
-internal fun getTypeface(context: Context, asset: String): Typeface {
+internal fun getDrawable(form: Form, fileName: String): Drawable? {
     return try {
-        val path = getAssetPath(context, asset)
-        Typeface.createFromFile(path)
+        val inputStream: InputStream? = getAsset(form, fileName)
+        val drawable: Drawable = Drawable.createFromStream(inputStream, null)
+        inputStream?.close()
+        drawable
     } catch (e: Exception) {
-        Log.e(LOG_TAG, "getTypeface | Failed to get typeface from path : $asset with error : $e")
-        Typeface.DEFAULT
+        Log.v(LOG_TAG, "getDrawable : Error = $e")
+        null
     }
 }
 
-internal fun getDrawableFromPath(context: Context, file: String): Drawable? {
-    try {
-        val path = getAssetPath(context, file)
-        return Drawable.createFromPath(path)
+internal fun getAsset(form: Form, file: String): InputStream? {
+    val context = form.`$context`()
+    val isDebugMode = form is ReplForm
+    return try {
+        if (isDebugMode) {
+            val path: String = getAssetPath(context, file)
+            Log.v(LOG_TAG, "getAsset | Filepath = $path")
+            FileInputStream(path)
+        } else {
+            context.assets.open(file)
+        }
     } catch (e: Exception) {
-        Log.e(LOG_TAG, "getDrawableFromPath | Error occurred : $e")
-        throw YailRuntimeError("Error occurred while getting icon from assets : $file", LOG_TAG)
+        Log.e(LOG_TAG, "getAsset | Debug Mode : $isDebugMode | Error : $e")
+        null
+    }
+}
+
+internal fun getTypeface(form: Form, asset: String): Typeface {
+    val context = form.`$context`()
+    val isDebugMode = form is ReplForm
+    return try {
+        if (isDebugMode) {
+            val path = getAssetPath(context, asset)
+            Typeface.createFromFile(path)
+        } else {
+            val path = form.getAssetPath(asset)
+            Typeface.createFromFile(path)
+        }
+    } catch (e: Exception) {
+        Log.e(LOG_TAG, "getTypeface | Failed to get typeface from path : $asset with error : $e")
+        Typeface.DEFAULT
     }
 }
 

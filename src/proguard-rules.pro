@@ -16,5 +16,3 @@
 
 -dontwarn androidx.recyclerview.widget.**
 -dontwarn com.google.android.flexbox.**
-
--keepnames class com.dreamers.bottombar.library**

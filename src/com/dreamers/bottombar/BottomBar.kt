@@ -119,14 +119,14 @@ class BottomBar(container: ComponentContainer) : AndroidNonvisibleComponent(cont
             })
         }
 
-        (view.view.parent as ViewGroup).addView(bottomBar)
+        (view.view as ViewGroup).addView(bottomBar)
     }
 
     // Add Tab
     @SimpleFunction(description = "Add a new tab")
     fun AddTab(icon: String, title: String, id: Int) {
         val tab = bottomBar?.createTab(
-            icon = getDrawableFromPath(context, icon),
+            icon = getDrawable(form, icon),
             title = title,
             id = id
         )
@@ -137,7 +137,7 @@ class BottomBar(container: ComponentContainer) : AndroidNonvisibleComponent(cont
     @SimpleFunction(description = "Add a new tab at specific index")
     fun AddTabAt(index: Int, icon: String, title: String, id: Int) {
         val tab = bottomBar?.createTab(
-            icon = getDrawableFromPath(context, icon),
+            icon = getDrawable(form, icon),
             title = title,
             id = id
         )
@@ -410,7 +410,7 @@ class BottomBar(container: ComponentContainer) : AndroidNonvisibleComponent(cont
     )
     @SimpleProperty(description = "Set custom font typeface")
     fun Typeface(asset: String) {
-        typeface = getTypeface(context, asset)
+        typeface = getTypeface(form, asset)
         bottomBar?.typeface = typeface
     }
 
