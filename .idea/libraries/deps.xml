@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="deps">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/deps" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$USER_HOME$/AndroidStudioProjects/bottombar/animatedbottombar/src/main/java/nl" />
+    </SOURCES>
+    <jarDirectory url="file://$PROJECT_DIR$/deps" recursive="false" />
+  </library>
+</component>
