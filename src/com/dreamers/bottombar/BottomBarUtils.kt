@@ -3,7 +3,6 @@ package com.dreamers.bottombar
 import android.content.Context
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
-import android.os.Build
 import android.util.Log
 import android.util.TypedValue
 import android.view.animation.Interpolator
@@ -15,6 +14,7 @@ import com.google.appinventor.components.runtime.Form
 import com.google.appinventor.components.runtime.ReplForm
 import java.io.FileInputStream
 import java.io.InputStream
+import android.os.Build as OsBuild
 
 const val LOG_TAG = "BOTTOM_BAR"
 
@@ -79,13 +79,13 @@ internal fun getTypeface(form: Form, asset: String): Typeface {
 
 private fun getAssetPath(context: Context, file: String) = when {
     context.javaClass.name.contains("makeroid") -> {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        if (OsBuild.VERSION.SDK_INT >= OsBuild.VERSION_CODES.Q) {
             context.getExternalFilesDir(null).toString() + "/assets/$file"
         } else {
             "/storage/emulated/0/Kodular/assets/$file"
         }
     }
-    else -> context.getExternalFilesDir(null).toString() + "/AppInventor/assets/$file"
+    else -> context.getExternalFilesDir(null).toString() + "/assets/$file"
 }
 
 /** Convert dp to px */

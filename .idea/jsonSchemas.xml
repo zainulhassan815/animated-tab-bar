@@ -3,10 +3,10 @@
   <component name="JsonSchemaMappingsProjectConfiguration">
     <state>
       <map>
-        <entry key="rush">
+        <entry key="Rush">
           <value>
             <SchemaInfo>
-              <option name="name" value="rush" />
+              <option name="name" value="Rush" />
               <option name="relativePathToSchema" value="https://raw.githubusercontent.com/shreyashsaitwal/rush-cli/main/schema/rush.json" />
               <option name="patterns">
                 <list>

@@ -13,10 +13,10 @@ import android.widget.FrameLayout
 import androidx.annotation.*
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.dreamers.bottombar.library.utils.dpPx
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
-import com.dreamers.bottombar.library.utils.dpPx
 
 class AnimatedBottomBar @JvmOverloads constructor(
     context: Context,
